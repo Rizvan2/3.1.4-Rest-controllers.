@@ -49,11 +49,11 @@ public class Init {
         userRoles.add(userRole);
 
         if (userRepository.findByUsername("Admin").isEmpty()) {
-            userService.save(new User("Admin", "adminEmail@gmail.com", "123", adminRoles));
+            userService.save(new User("Admin", "123", adminRoles));
         }
 
         if (userRepository.findByUsername("User ").isEmpty()) {
-            userService.save(new User("User", "userEmail@gmail.com", "123", userRoles));
+            userService.save(new User("User", "123", userRoles));
         }
     }
 }

@@ -34,6 +34,16 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     @Transactional(readOnly = true)
+    public Set<Role> findRolesByNameIn(List<String> names) {
+        Set<Role> roles = roleRepository.findByNameIn(names);
+        if (roles.isEmpty()) {
+            throw new IllegalArgumentException("Roles not found: " + names);
+        }
+        return roleRepository.findByNameIn(names);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Set<Role> getRolesFromIds(List<Long> selectedRoleIds) {
         return selectedRoleIds != null ? selectedRoleIds
                 .stream().map(roleRepository::findRoleById)

@@ -69,6 +69,11 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.7.0</version> <!-- Версия для Spring Boot 2.6.x -->
+    </dependency>
   </dependencies>
 
   <build>

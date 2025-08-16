@@ -22,13 +22,7 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "email")
-    @NotEmpty(message = "Строка не должна быть пустой")
-    private String email;
-
     @Column(name = "password")
-
-
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -43,9 +37,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String email, String password, Set<Role> roles) {
+    public User(String username, String password, Set<Role> roles) {
         this.username = username;
-        this.email = email;
         this.password = password;
         this.roles = new HashSet<>(roles);
     }
@@ -53,7 +46,6 @@ public class User implements UserDetails {
     public User(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.email = user.getEmail();
         this.password = user.getPassword();
         this.roles = new HashSet<>(user.roles);
     }
@@ -73,14 +65,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Set<Role> getRoles() {
@@ -145,13 +129,12 @@ public class User implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id && Objects.equals(username, user.username)
-                && Objects.equals(email, user.email)
                 && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password);
+        return Objects.hash(id, username, password);
     }
 
     @Override
@@ -159,7 +142,6 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + username + '\'' +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
